@@ -20,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('order', 'OrderController');
+    Route::resource('ticket', 'TicketController');
+    
+    Route::prefix('admin')->middleware('admin')->group(function () {
+        Route::resource('product', 'ProductController');
+    });
+});
