@@ -72,12 +72,27 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        $order->status = $request->status;
+        if ($request->status == 2) {
+            if ($order->ticket->activated == 1) {
+                return redirect()->back()->withErrors(['error' => 'Este pedido não pode mais ser cancelado']);
+            } else {
+                $order->status = $request->status;
+                $order->save();
+                return redirect()->back()->withErrors(['success' => 'Pedido cancelado']);
+            }
+        }
+        if ($order->status == 2) {
+            if ($order->ticket) {
+                $ticket = $order->ticket;
+                if (!$ticket->activated) {
+                    $ticket->delete();
+                } else {
+                }
+            }
+        }
         $order->save();
         if ($request->status == 1) {
             return redirect()->back()->withErrors(['success' => 'Pagamento recebido']);
-        } else {
-            return redirect()->back()->withErrors(['success' => 'Pedido cancelado']);
         }
     }
 

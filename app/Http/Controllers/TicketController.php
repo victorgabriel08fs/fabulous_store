@@ -95,7 +95,7 @@ class TicketController extends Controller
             $ticket->save();
             return redirect()->back()->withErrors(['success' => 'Resgate realizado']);
         } else {
-            return redirect()->back()->withErrors(['error' => 'Ticket não existe ou já foi utilizado']);
+            return redirect()->back()->withErrors(['error' => 'Este ticket não existe ou já foi utilizado']);
         }
     }
 }

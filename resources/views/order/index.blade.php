@@ -34,30 +34,52 @@
                                             <td>{{ $order->subtotal }}</td>
                                             <td>{{ $order->total }}</td>
                                             <td>
-                                                @if ($order->status == 0)
-                                                    <p>Recebido</p>
-                                                @elseif($order->status == 1)
-                                                    <p>Pagamento confirmado</p>
-                                                @else
-                                                    <p>Cancelado</p>
-                                                @endif
+                                                @switch($order->status)
+                                                    @case(0)
+                                                        <p>Recebido</p>
+                                                    @break
+
+                                                    @case(1)
+                                                        <p>Pagamento confirmado</p>
+                                                    @break
+
+                                                    @case(2)
+                                                        <p>Cancelado</p>
+                                                    @break
+
+                                                    @case(3)
+                                                        <p>Finalizado</p>
+                                                    @break
+
+                                                    @default
+                                                @endswitch
                                             </td>
                                             <td>{{ isset($order->user->name) ? $order->user->name : '' }}</td>
-                                            <td>
-                                                <form action="{{ route('order.update', ['order' => $order->id]) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('patch')
-                                                    <input type="hidden" name="status" value="1">
-                                                    <button class="btn btn-primary" type="submit">Pagar</button>
-                                                </form>
-                                                <form action="{{ route('order.update', ['order' => $order->id]) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('patch')
-                                                    <input type="hidden" name="status" value="2">
-                                                    <button class="btn btn-primary" type="submit">Cancelar</button>
-                                                </form>
+                                            <td class="row">
+                                                @if ($order->status == 0)
+                                                    <div class="col">
+                                                        <form
+                                                            action="{{ route('order.update', ['order' => $order->id]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('patch')
+                                                            <input type="hidden" name="status" value="1">
+                                                            <button class="btn btn-primary" type="submit">Pagar</button>
+                                                        </form>
+                                                    </div>
+                                                @endif
+                                                @if ($order->status == 0 || ($order->status != 2 && (isset($order->ticket) && $order->ticket->activated != 1)))
+                                                    <div class="col">
+                                                        <form
+                                                            action="{{ route('order.update', ['order' => $order->id]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('patch')
+                                                            <input type="hidden" name="status" value="2">
+                                                            <button class="btn btn-primary" type="submit">Cancelar</button>
+                                                        </form>
+                                                    </div>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

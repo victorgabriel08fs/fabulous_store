@@ -26,8 +26,15 @@ class OrderObserver
      */
     public function updated(Order $order)
     {
-        if ($order->status) {
+        if ($order->status == 1) {
             Ticket::create(['reg' => (string)rand(1, 10000), 'order_id' => $order->id, 'paid_by' => auth()->user()->id]);
+        }
+        if ($order->status == 2) {
+            if ($order->ticket) {
+                if (!$order->ticket->activated) {
+                    $order->ticket->delete();
+                }
+            }
         }
     }
 

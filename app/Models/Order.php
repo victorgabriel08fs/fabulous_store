@@ -19,4 +19,8 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+    public function ticket()
+    {
+        return $this->hasOne('App\Models\Ticket');
+    }
 }
