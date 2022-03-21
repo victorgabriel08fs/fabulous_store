@@ -14,7 +14,7 @@
                             <div class="gallery">
                                 @foreach ($products as $product)
                                     <div class="mini-card-body">
-                                        <div style="background:  url({{ asset($product->image) }}) no-repeat"
+                                        <div style="background:  url({{ asset($product->image) }}) no-repeat;max-width:200px;max-height:350px;"
                                             class=" mini-card">
                                         </div>
                                         <h5 class="mini-card-title">{{ $product->name }}</h5>
