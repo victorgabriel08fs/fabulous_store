@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\LibraryProduct;
 use App\Models\Ticket;
 
 class TicketObserver
@@ -28,6 +29,7 @@ class TicketObserver
         if ($ticket->activated) {
             $ticket->order->status = 3;
             $ticket->order->save();
+            LibraryProduct::create(['library_id' => auth()->user()->library->id, 'product_id' => $ticket->order->product->id]);
         }
     }
 

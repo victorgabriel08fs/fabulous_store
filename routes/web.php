@@ -23,6 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware('auth')->group(function () {
     Route::resource('order', 'OrderController');
+    Route::resource('library', 'LibraryController');
     Route::resource('ticket', 'TicketController');
     Route::post('/redeem', 'TicketController@redeem')->name('ticket.redeem');
     Route::prefix('admin')->middleware('admin')->group(function () {

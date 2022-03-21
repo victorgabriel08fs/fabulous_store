@@ -1,0 +1,26 @@
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 25vw);
+    grid-gap: 1.5rem;
+}
+
+.mini-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mini-card-title {
+    text-align: end;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+}
+
+.gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}

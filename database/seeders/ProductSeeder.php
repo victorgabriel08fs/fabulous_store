@@ -14,7 +14,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        Product::create(['name' => 'God of War', 'type' => 'game', 'describe' => 'aaaa', 'price' => 100]);
-        Product::create(['name' => 'Minecraft', 'type' => 'game', 'describe' => 'bbbbb', 'price' => 50]);
+        Product::create(['name' => 'God of War', 'type' => 'game', 'describe' => 'aaaa', 'price' => 100, 'image' => 'storage/images/products/god-of-war.jpg']);
+        Product::create(['name' => 'Minecraft', 'type' => 'game', 'describe' => 'bbbbb', 'price' => 50, 'image' => 'storage/images/products/minecraft.png']);
     }
 }
