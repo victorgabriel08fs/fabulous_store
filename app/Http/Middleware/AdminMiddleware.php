@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->is_admin)
+        if (auth()->user()->admin)
             return $next($request);
         else
             return redirect()->back()->withErrors(['error' => 'Acesso negado']);

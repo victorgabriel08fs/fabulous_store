@@ -1,22 +1,38 @@
 .gallery {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 25vw);
+    grid-template-columns: repeat(3, 5fr);
+    grid-template-rows: repeat(3, 25vw);
     grid-gap: 1.5rem;
 }
 
 .mini-card {
     display: flex;
+    height: 100%;
     align-items: center;
     justify-content: center;
+    transition: all, 0.5s;
+}
+
+.mini-card:hover {
+    opacity: 55%;
+}
+
+.mini-card-body {
+    display: inline;
+    padding: 20px;
+    justify-content: center;
+    height: 100%;
 }
 
 .mini-card-title {
-    text-align: end;
-    background-color: white;
-    border-radius: 5px;
+    font-size: medium;
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: center;
     color: black;
+    cursor: default;
 }
+
 
 .gallery__img {
     width: 100%;

@@ -5,21 +5,52 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+                    <div class="card-header">{{ __('Biblioteca') }}</div>
 
                     <div class="card-body">
-                        <div class="gallery">
-                            @foreach ($library_products as $library)
-                                <div style="background: url({{ asset($library->product->image) }});"
-                                    class=" mini-card">
-                                    <figure>
-                                        <div class="mini-card-body">
-                                            <h4 class="mini-card-title">{{ $library->product->name }}</h4>
+                        @if (!$library_products->first())
+                            <p>Por enquanto sua biblioteca está vazia...</p>
+                        @else
+                            <div class="gallery">
+                                @foreach ($library_products as $library)
+                                    <div class="mini-card-body">
+                                        <div style="background: url({{ asset($library->product->image) }}) no-repeat"
+                                            class=" mini-card">
                                         </div>
-                                    </figure>
-                                </div>
-                            @endforeach
-                        </div>
+                                        <h5 class="mini-card-title">{{ $library->product->name }}</h5>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url()->previous() }}" class="btn btn-primary float-right">Voltar</a>
+                        <br>
+                        <br>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $library_products->previousPageUrl() }}"
+                                        aria-label="Anterior">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Anterior</span>
+                                    </a>
+                                </li>
+                                @for ($i = 1; $i <= $library_products->lastPage(); $i++)
+                                    <li class="page-item {{ $library_products->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link"
+                                            href="{{ $library_products->url($i) }}">{{ $i }}</a>
+                                    </li>
+                                @endfor
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $library_products->nextPageUrl() }}"
+                                        aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Próximo</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

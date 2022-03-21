@@ -13,20 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('order', 'OrderController');
     Route::resource('library', 'LibraryController');
     Route::resource('ticket', 'TicketController');
+    Route::resource('product', 'ProductController');
     Route::post('/redeem', 'TicketController@redeem')->name('ticket.redeem');
     Route::prefix('admin')->middleware('admin')->group(function () {
-        Route::resource('product', 'ProductController');
     });
 });

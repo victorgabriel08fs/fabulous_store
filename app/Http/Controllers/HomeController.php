@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $library_products = LibraryProduct::where('library_id', auth()->user()->library->id)->paginate(10);
+        $library_products = LibraryProduct::where('library_id', auth()->user()->library->id)->paginate(9);
         return view('home', ['library_products' => $library_products]);
     }
 }
