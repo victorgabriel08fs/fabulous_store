@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -83,5 +84,18 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket)
     {
         //
+    }
+
+    public function redeem(Request $request)
+    {
+        $ticket = Ticket::where('reg', $request->reg)->get()->first();
+        if ($ticket && $ticket->activated == 0) {
+            $ticket->activated = 1;
+            $ticket->received_by = auth()->user()->id;
+            $ticket->save();
+            return redirect()->back()->withErrors(['success' => 'Resgate realizado']);
+        } else {
+            return redirect()->back()->withErrors(['error' => 'Ticket não existe ou já foi utilizado']);
+        }
     }
 }

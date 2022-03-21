@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     use HasFactory;
-    protected $fillable = ['reg', 'order_id', 'paid_by', 'received_by'];
+    protected $fillable = ['reg', 'activated', 'order_id', 'paid_by', 'received_by'];
 
     public function receiver()
     {

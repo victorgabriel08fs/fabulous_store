@@ -26,8 +26,8 @@ class TicketObserver
     public function updated(Ticket $ticket)
     {
         if ($ticket->activated) {
-            if (!$ticket->user_id) {
-                $ticket->user_id = auth()->user()->id;
+            if (!$ticket->received_by) {
+                $ticket->received_by = auth()->user()->id;
                 $ticket->save();
             }
         }

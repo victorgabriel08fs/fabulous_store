@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @component('ticket._components.modals.redeem')
+    @endcomponent
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -13,6 +15,9 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalRedeem">
+                            Resgatar Código
+                        </button>
                         <div class="table">
                             <table class="table">
                                 <thead>
