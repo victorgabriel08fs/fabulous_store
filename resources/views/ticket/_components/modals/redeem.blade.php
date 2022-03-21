@@ -9,8 +9,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group mb-3">
-                        <label class="form-label" for="reg">Código</label>
-                        <input class="form-control" type="text" name="reg" id="regId"><br>
+                        <label class="form-label" for="code">Código</label>
+                        <input class="form-control" type="text" name="code" id="codeId"><br>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -30,7 +30,7 @@
                                 <tbody>
                                     @foreach ($tickets as $ticket)
                                         <tr>
-                                            <td>{{ $ticket->reg }}</td>
+                                            <td>{{ $ticket->code }}</td>
                                             <td>{{ isset($ticket->order->reg) ? $ticket->order->reg : '' }}</td>
                                             <td>{{ $ticket->activated ? 'Usado' : 'Não usado' }}</td>
                                             <td>

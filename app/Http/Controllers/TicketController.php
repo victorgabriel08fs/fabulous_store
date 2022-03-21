@@ -88,7 +88,7 @@ class TicketController extends Controller
 
     public function redeem(Request $request)
     {
-        $ticket = Ticket::where('reg', $request->reg)->get()->first();
+        $ticket = Ticket::where('code', $request->code)->get()->first();
         if ($ticket && $ticket->activated == 0) {
             $ticket->activated = 1;
             $ticket->received_by = auth()->user()->id;
