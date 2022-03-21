@@ -20,8 +20,10 @@ class CreateTicketsTable extends Migration
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('paid_by')->nullable();
+            $table->foreign('paid_by')->references('id')->on('users');
+            $table->unsignedBigInteger('received_by')->nullable();
+            $table->foreign('received_by')->references('id')->on('users');
 
             $table->timestamps();
         });

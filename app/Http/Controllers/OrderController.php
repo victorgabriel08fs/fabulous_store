@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -15,7 +16,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::where('user_id', auth()->user()->id)->paginate(10);
+        return view('order.index', ['orders' => $orders]);
     }
 
     /**
@@ -68,9 +70,15 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(Request $request, Order $order)
     {
-        //
+        $order->status = $request->status;
+        $order->save();
+        if ($request->status == 1) {
+            return redirect()->back()->withErrors(['success' => 'Pagamento recebido']);
+        } else {
+            return redirect()->back()->withErrors(['success' => 'Pedido cancelado']);
+        }
     }
 
     /**

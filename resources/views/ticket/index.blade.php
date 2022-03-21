@@ -20,7 +20,8 @@
                                         <th scope="col">Registro</th>
                                         <th scope="col">Pedido</th>
                                         <th>Status</th>
-                                        <th>Usuário</th>
+                                        <th>Pago por</th>
+                                        <th>Recebido por</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -30,7 +31,9 @@
                                             <td>{{ isset($ticket->order->reg) ? $ticket->order->reg : '' }}</td>
                                             <td>{{ $ticket->activated ? 'Usado' : 'Não usado' }}</td>
                                             <td>
-                                                {{ isset($ticket->user->name) ? $ticket->user->name : '' }}</td>
+                                                {{ isset($ticket->paying->name) ? $ticket->paying->name : '' }}</td>
+                                            <td>
+                                                {{ isset($ticket->receiver->name) ? $ticket->receiver->name : '' }}</td>
                                         </tr>
                                     @endforeach
 

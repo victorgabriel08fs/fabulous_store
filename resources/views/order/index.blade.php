@@ -23,6 +23,7 @@
                                         <th>Total</th>
                                         <th>Status</th>
                                         <th>Usuário</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -30,8 +31,8 @@
                                         <tr>
                                             <td>{{ $order->reg }}</td>
                                             <td>{{ $order->product->name }}</td>
-                                            <td>{{$order->subtotal}}</td>
-                                            <td>{{$order->total}}</td>
+                                            <td>{{ $order->subtotal }}</td>
+                                            <td>{{ $order->total }}</td>
                                             <td>
                                                 @if ($order->status == 0)
                                                     <p>Recebido</p>
@@ -42,6 +43,22 @@
                                                 @endif
                                             </td>
                                             <td>{{ isset($order->user->name) ? $order->user->name : '' }}</td>
+                                            <td>
+                                                <form action="{{ route('order.update', ['order' => $order->id]) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('patch')
+                                                    <input type="hidden" name="status" value="1">
+                                                    <button class="btn btn-primary" type="submit">Pagar</button>
+                                                </form>
+                                                <form action="{{ route('order.update', ['order' => $order->id]) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('patch')
+                                                    <input type="hidden" name="status" value="2">
+                                                    <button class="btn btn-primary" type="submit">Cancelar</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
 

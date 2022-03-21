@@ -15,7 +15,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = Ticket::where('paid_by', auth()->user()->id)->orWhere('received_by', auth()->user()->id)->paginate(10);
+        return view('ticket.index', ['tickets' => $tickets]);
     }
 
     /**
