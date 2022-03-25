@@ -13,12 +13,13 @@
                         @else
                             <div class="gallery">
                                 @foreach ($products as $product)
-                                    <div class="mini-card-body">
-                                        <div style="background:  url({{ asset($product->image) }}) no-repeat;max-width:200px;max-height:350px;"
-                                            class=" mini-card">
+                                    <a class="link"
+                                        href="{{ route('product.show', ['product' => $product->id]) }}">
+                                        <div class="mini-card-body">
+                                            <img src="{{ url(asset($product->image)) }}" alt="">
+                                            <h5 class="mini-card-title">{{ $product->name }}</h5>
                                         </div>
-                                        <h5 class="mini-card-title">{{ $product->name }}</h5>
-                                    </div>
+                                    </a>
                                 @endforeach
                             </div>
                         @endif

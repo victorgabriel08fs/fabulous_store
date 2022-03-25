@@ -17,6 +17,8 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('describe');
+            $table->string('publisher');
+            $table->integer('avaliation');
             $table->string('type');
             $table->decimal('price', 10, 2);
             $table->string('image')->nullable();
