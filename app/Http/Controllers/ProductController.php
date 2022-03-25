@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\LibraryProduct;
 
 class ProductController extends Controller
 {
@@ -48,7 +49,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('product.show', ['product' => $product]);
+        $has_product = false;
+        if (LibraryProduct::where('product_id', $product->id)->where('library_id', auth()->user()->library->id)->get()->first()) {
+            $has_product = true;
+        }
+        return view('product.show', ['product' => $product, 'has_product' => $has_product]);
     }
 
     /**

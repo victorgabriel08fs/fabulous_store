@@ -6,7 +6,6 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Loja') }}</div>
-
                     <div class="card-body">
                         @if (!$products->first())
                             <p>Por enquanto a loja está vazia...</p>

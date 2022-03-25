@@ -6,19 +6,19 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Biblioteca') }}</div>
-
                     <div class="card-body">
                         @if (!$library_products->first())
                             <p>Por enquanto sua biblioteca está vazia...</p>
                         @else
                             <div class="gallery">
                                 @foreach ($library_products as $library)
-                                    <div class="mini-card-body">
-                                        <div style="background: url({{ asset($library->product->image) }}) no-repeat"
-                                            class=" mini-card">
+                                    <a class="link"
+                                        href="{{ route('product.show', ['product' => $library->product->id]) }}">
+                                        <div class="mini-card-body">
+                                            <img src="{{ url(asset($library->product->image)) }}" alt="">
+                                            <h5 class="mini-card-title">{{ $library->product->name }}</h5>
                                         </div>
-                                        <h5 class="mini-card-title">{{ $library->product->name }}</h5>
-                                    </div>
+                                    </a>
                                 @endforeach
                             </div>
                         @endif

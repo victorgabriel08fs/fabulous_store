@@ -25,7 +25,7 @@
                                     {{ $product->describe }}
                                 </div>
                                 <div class="wrapper-item order col">
-                                    <p class="row align-items-center">
+                                    <p class="row align-items-center avaliation">
                                         Avaliação:
                                         @for ($i = 1; $i <= 5; $i++)
                                             @if ($i <= $product->avaliation)
@@ -38,7 +38,8 @@
                                     <p class="row">Por: {{ $product->publisher }}</p>
                                     <p><strong class="row">Preço:
                                             {{ number_format($product->price, 2) }}</strong></p>
-                                    <button class="row btn btn-primary">Comprar</button>
+                                    <button {{ $has_product ? 'disabled' : '' }}
+                                        class="row btn btn-primary">{{ $has_product ? 'Já possui' : 'Comprar' }}</button>
                                 </div>
                             </div>
                         @endif

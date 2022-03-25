@@ -87,3 +87,10 @@
     max-width: 50%;
     text-align: justify;
 }
+
+.avaliation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
