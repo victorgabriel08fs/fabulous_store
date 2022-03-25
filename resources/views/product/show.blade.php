@@ -38,8 +38,8 @@
                                     <p class="row">Por: {{ $product->publisher }}</p>
                                     <p><strong class="row">Preço:
                                             {{ number_format($product->price, 2) }}</strong></p>
-                                    <button {{ $has_product ? 'disabled' : '' }}
-                                        class="row btn btn-primary">{{ $has_product ? 'Já possui' : 'Comprar' }}</button>
+                                    <a href="{{ route('order.create-page', ['product' => $product->id]) }}"
+                                        class="row btn btn-primary {{ $has_product ? 'disabled' : '' }}">{{ $has_product ? 'Já possui' : 'Comprar' }}</a>
                                 </div>
                             </div>
                         @endif

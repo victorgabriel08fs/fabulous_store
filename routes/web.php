@@ -19,6 +19,8 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('order', 'OrderController');
+    Route::get('/orderCreate/{product}', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create-page');
+    Route::post('/orderCoupon/{product}', [App\Http\Controllers\OrderController::class, 'create'])->name('order.coupon');
     Route::resource('library', 'LibraryController');
     Route::resource('ticket', 'TicketController');
     Route::resource('product', 'ProductController');

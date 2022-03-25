@@ -8,7 +8,8 @@
                     <div class="card-header">{{ __('Biblioteca') }}</div>
                     <div class="card-body">
                         @if (!$library_products->first())
-                            <p>Por enquanto sua biblioteca está vazia...</p>
+                            <p>Por enquanto sua biblioteca está vazia... Acesse a <a
+                                    href="{{ route('product.index') }}">loja</a> para conhecer nossos produtos.</p>
                         @else
                             <div class="gallery">
                                 @foreach ($library_products as $library)

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Coupon;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -25,9 +27,30 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Product $product, Request $request)
     {
-        //
+
+        // if ($request->discount) {
+        //     $discount = $request->discount;
+        // } else {
+        $discount = 0;
+        // }
+        return view('order.create', ['product' => $product, 'discount' => $discount]);
+    }
+
+    public function validateCoupon(Request $request)
+    {
+        // $product = Product::find($request->product);
+        // if ($request->coupon) {
+        //     $coupon = Coupon::where('code', $request->coupon)->get()->first();
+        //     if ($coupon && $coupon->usage_times < $coupon->max_usage_times) {
+        //         $discount = $coupon->discount;
+        //         $coupon->usage_times = $coupon->usage_times + 1;
+        //         $coupon->save();
+        //         return redirect()->route('order.create-page', ['product' => $product, 'discount' => $discount])->withErrors(['success' => 'Cupom resgatado']);
+        //     } else
+        //         return redirect()->route('order.create-page', ['product' => $product])->withErrors(['error' => 'Cupom inválido']);
+        // }
     }
 
     /**
@@ -36,9 +59,14 @@ class OrderController extends Controller
      * @param  \App\Http\Requests\StoreOrderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrderRequest $request)
+    public function store(Request $request)
     {
-        //
+        $reg = (string)rand(1, 100000);
+        while (Order::where('reg', $reg)->get()->first()) {
+            $reg = (string)rand(1, 100000);
+        }
+        Order::create(['reg' => $reg, 'product_id' => $request->product_id, 'total' => $request->total, 'subtotal' => $request->subtotal, 'user_id' => auth()->user()->id]);
+        return redirect()->route('order.index')->withErrors(['success' => 'Pedido confirmado']);
     }
 
     /**
