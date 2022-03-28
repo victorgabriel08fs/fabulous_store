@@ -27,4 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/redeem', 'TicketController@redeem')->name('ticket.redeem');
     Route::prefix('admin')->middleware('admin')->group(function () {
     });
+
+    Route::middleware('admin')->prefix('admin')->group(function () {
+        Route::get('/home', [App\Http\Controllers\AdminController::class, 'home'])->name('admin.home.index');
+    });
 });
