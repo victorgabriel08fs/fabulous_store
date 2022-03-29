@@ -29,6 +29,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('admin')->prefix('admin')->group(function () {
-        Route::get('/home', [App\Http\Controllers\AdminController::class, 'home'])->name('admin.home.index');
+        Route::get('/', [App\Http\Controllers\AdminController::class, 'home'])->name('admin.home.index');
     });
 });
